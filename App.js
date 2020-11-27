@@ -31,6 +31,24 @@ export default function App() {
           val >= 0 && val <= 100 ? setDiscountPercent(val) : '';
         }}
       />
+      <Text style={[{ textAlign: 'center' }]}>
+        {getDiscountPercent != '' && getOriginalPrice !== '' ? (
+          <View>
+            <Text style={styles.result}>
+              You Save : {(getOriginalPrice * getDiscountPercent) / 100}
+            </Text>
+            <Text style={styles.result}>
+              Final Price :{' '}
+              {getOriginalPrice - (getOriginalPrice * getDiscountPercent) / 100}
+            </Text>
+            <TouchableHighlight style={styles.saveButton} onPress={addItem}>
+              <Text style={styles.textStyle}>Save Details</Text>
+            </TouchableHighlight>
+          </View>
+        ) : (
+          ''
+        )}
+      </Text>
     </View>
   );
 }
