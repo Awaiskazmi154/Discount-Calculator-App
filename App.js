@@ -60,4 +60,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#ecf0f1',
   },
+  input: {
+    borderWidth: 1,
+    borderColor: '#777',
+    padding: 8,
+    margin: 10,
+    width: '60%',
+  },
+  result: {
+    textAlign: 'center',
+    fontWeight: '500',
+    fontSize: 30,
+    paddingBottom: '5%',
+  },
 });
