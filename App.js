@@ -16,8 +16,24 @@ import AssetExample from './components/AssetExample';
 
 export default function App() {
 
+  const [getPriceList, setPriceList] = useState([]);
+  const [getDiscountList, setDiscountList] = useState([]);
+  const [getPriceAfterList, setPriceAfterList] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
   const [getOriginalPrice, setOriginalPrice] = useState('');
   const [getDiscountPercent, setDiscountPercent] = useState('');
+  const [getFinalPrice, setFinalPrice] = useState(
+    getOriginalPrice - (getOriginalPrice * getDiscountPercent) / 100
+  );
+
+  const addItem = () => {
+    setPriceList([...getPriceList, getOriginalPrice]);
+    setDiscountList([...getDiscountList, getDiscountPercent]);
+    setPriceAfterList([
+      ...getPriceAfterList,
+      getOriginalPrice - (getOriginalPrice * getDiscountPercent) / 100,
+    ]);
+  };
 
   return (
     <View style={styles.container}>
@@ -141,5 +157,49 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     fontSize: 30,
     paddingBottom: '5%',
+  },
+  modalView: {
+    textAlign: 'center',
+    margin: 25,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 30,
+    paddingBottom: 20,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  openButton: {
+    backgroundColor: '#F194FF',
+    borderRadius: 20,
+    padding: 10,
+    paddingHorizontal: 60,
+    elevation: 2,
+    margin: 5,
+  },
+  saveButton: {
+    backgroundColor: '#F194FF',
+    borderRadius: 20,
+    padding: 10,
+    margin: 5,
+    elevation: 2,
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 });
