@@ -1,5 +1,13 @@
 import React, { Component, useState } from 'react';
-import { Text, TextInput, View, StyleSheet } from 'react-native';
+import { Text,
+  TextInput,
+  View,
+  StyleSheet,
+  Button,
+  Alert,
+  Modal,
+  TouchableHighlight,
+  ScrollView, } from 'react-native';
 import Constants from 'expo-constants';
 
 // You can import from local files
@@ -49,6 +57,67 @@ export default function App() {
           ''
         )}
       </Text>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+        }}>
+        <View>
+          <ScrollView style={styles.modalView}>
+            <View style={styles.modalText}>
+              <Text style={{ fontWeight: 'bold' }}>Original{'\n'}Price</Text>
+              <Text style={{ fontWeight: 'bold' }}>Discount{'\n'}%</Text>
+              <Text style={{ fontWeight: 'bold' }}>
+                Price{'\n'}After{'\n'}Discount
+              </Text>
+            </View>
+            <View style={styles.modalText}>
+              <View>
+                {getPriceList.map((item) => (
+                  <Text>
+                    {item}
+                    {'\n'}
+                  </Text>
+                ))}
+              </View>
+              <View>
+                {getDiscountList.map((item) => (
+                  <Text>
+                    {item}
+                    {'\n'}
+                  </Text>
+                ))}
+              </View>
+              <View>
+                {getPriceAfterList.map((item) => (
+                  <Text>
+                    {item}
+                    {'\n'}
+                  </Text>
+                ))}
+              </View>
+            </View>
+
+            <TouchableHighlight
+              style={{ ...styles.openButton, backgroundColor: '#2196F3' }}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+              }}>
+              <Text style={styles.textStyle}>Hide List</Text>
+            </TouchableHighlight>
+          </ScrollView>
+        </View>
+      </Modal>
+
+      <TouchableHighlight
+        style={styles.openButton}
+        onPress={() => {
+          setModalVisible(true);
+        }}>
+        <Text style={styles.textStyle}>Show List</Text>
+      </TouchableHighlight>
     </View>
   );
 }
